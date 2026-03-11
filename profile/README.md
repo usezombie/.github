@@ -8,7 +8,8 @@ Building reliable tools and systems.
 - Practical tooling with deterministic workflows
 
 ## Featured repositories
-Pin your most important repos in the organization profile settings so visitors see them first.
+- [usezombie/usezombie](https://github.com/usezombie/usezombie)
+- [usezombie/posthog-zig](https://github.com/usezombie/posthog-zig)
 
 ## Get involved
 - Explore repositories: https://github.com/usezombie?tab=repositories
