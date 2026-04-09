@@ -6,9 +6,9 @@
   <img src="https://raw.githubusercontent.com/usezombie/usezombie/main/assets/logo-dark.svg" width="200" alt="usezombie" />
 </picture>
 
-**Heroku for agents, but the agent never sees your keys.**
+**Your agent is ready. You're not ready to trust it. We fix that.**
 
-Run your agents 24/7. Walled, watched, killable.
+**Run your agents 24/7. Credentials hidden. Every action logged. Big moves approved.**
 
 [![Try Free](https://img.shields.io/badge/UseZombie-Try_Free-brightgreen?style=for-the-badge)](https://usezombie.com)
 [![Docs](https://img.shields.io/badge/UseZombie-Docs-blue?style=for-the-badge)](https://docs.usezombie.com)
@@ -17,42 +17,60 @@ Run your agents 24/7. Walled, watched, killable.
 
 ---
 
-## Why we pivoted
+## The problem
 
-We started by obsessing over one thing: making AI-generated code *correct*. Self-repair loops, quality scoring, scorecard evidence. Good problems — but narrow ones. Frontier models get better every quarter, and the gap we were optimizing for keeps shrinking on its own.
+You have a working agent. It can reply to emails, fix bugs, process payments, review PRs. But you won't let it run unsupervised because:
 
-The tempting move is to double down — we built it, so we stick with it. But code is cattle, not pets. You don't keep a solution alive just because you wrote it.
+- It has your API keys (what if it goes rogue?)
+- You can't see what it did (what if the CEO asks?)
+- There's no spend ceiling (what if one bad prompt burns $500?)
+- There's no kill switch (what if it starts replying to every email in your inbox?)
+
+So you babysit it. Or you don't run it at all.
+
+## The fix
+
+```bash
+$ zombiectl install lead-collector
+  Lead Collector installed.
+
+$ zombiectl up
+  lead-collector is live.
+  Listening for emails at you@mail.usezombie.com
+```
+
+That's it. Your agent is running 24/7 in a sandboxed process. It never sees your credentials. Every action is logged. You set the budget. You hold the kill switch.
+
+## What Zombies are
+
+A **Zombie** is a pre-built, configurable agent workflow that does one job and runs forever.
 
 ```
-          ____________________________
-         < code(human) === cattle now >
-          ----------------------------
-                 \   ^__^
-                  \  (oo)\_______
-                     (__)\       )\/\
-                         ||----w |
-                         ||     ||
+"Install the Lead Zombie"      → handles inbound email, replies, logs leads
+"Install the Slack Bug Fixer"  → monitors #bugs, opens PRs, replies in thread
+"Install the PR Zombie"        → reviews every PR, posts feedback, alerts on critical
+"Install the Ops Zombie"       → watches infra, alerts on incidents
 ```
 
-So we killed the old approach and pivoted. UseZombie is now a runtime for always-on agents — you bring your agent, we handle the credentials (hidden from the sandbox, injected at the firewall), webhooks (wired automatically), audit logs (every action timestamped), and a kill switch. Your agent runs 24/7 without ever seeing a password.
+You don't code a Zombie. You configure it: what tools it attaches, what credentials it uses, what budget it has, what triggers it. The agent intelligence is built in.
 
-## What zombies do
+## How it works
 
-- **Always-on agents** — your agent runs continuously in a sandboxed process, restarts on crash
-- **Credentials hidden** — agents never see tokens; the firewall injects them per-request, outside the sandbox boundary
-- **Webhooks wired** — receive events from email, Slack, GitHub, etc. without ngrok or custom servers
-- **Observability** — see what your agent did, when, why, and how much it cost — before the invoice surprises you
-- **Spend ceiling** — per-run token budgets and wall time limits; one bad prompt never becomes an infinite burn
-- **Kill switch** — stop any agent mid-action from the CLI or web UI
+- **Sandboxed runtime** — bwrap + landlock isolation. Network deny-by-default.
+- **Credentials hidden** — vault injects at the sandbox boundary. The agent never sees API keys.
+- **Webhooks wired** — receive events from email, Slack, GitHub. No ngrok needed.
+- **Activity stream** — every action timestamped. `zombiectl logs` shows what happened and why.
+- **Spend ceiling** — per-day and per-month dollar budgets. One bad prompt never becomes an infinite burn.
+- **Kill switch** — `zombiectl kill` stops any agent mid-action. Checkpoint saved, no data lost.
+- **Crash recovery** — state checkpointed after every event. Crashes recover automatically.
 
-## Projects
+## Get started
 
-- [usezombie/usezombie](https://github.com/usezombie/usezombie) — core platform
-- [usezombie/posthog-zig](https://github.com/usezombie/posthog-zig) — PostHog client for Zig
-- [usezombie/docs](https://github.com/usezombie/docs) — documentation
+```bash
+npm install -g zombiectl
+zombiectl login
+zombiectl install lead-collector
+zombiectl up
+```
 
-## Links
-
-- [usezombie.com](https://usezombie.com)
-- [docs.usezombie.com](https://docs.usezombie.com)
-- [All repositories](https://github.com/usezombie?tab=repositories)
+[Read the docs →](https://docs.usezombie.com)
