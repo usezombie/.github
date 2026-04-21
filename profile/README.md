@@ -64,3 +64,12 @@ zombiectl up
 ```
 
 [Read the docs →](https://docs.usezombie.com)
+
+## Repositories
+
+| Repo | What it is |
+|------|------------|
+| [usezombie/usezombie](https://github.com/usezombie/usezombie) | Control plane + worker + CLI. Zig `zombied` server, Node/Bun `zombiectl`, NullClaw agent runtime, and the Next.js dashboard. Where every behavior you see above is implemented. |
+| [usezombie/docs](https://github.com/usezombie/docs) | User-facing documentation site ([docs.usezombie.com](https://docs.usezombie.com)) — quickstart, API reference, operator guides, changelog. |
+| [usezombie/posthog-zig](https://github.com/usezombie/posthog-zig) | PostHog SDK for Zig. Powers the signup funnel, zombie lifecycle, and billing telemetry inside the `zombied` control plane. Usable standalone. |
+
