@@ -6,9 +6,9 @@
   <img src="https://raw.githubusercontent.com/usezombie/usezombie/main/assets/logo-dark.svg" width="200" alt="usezombie" />
 </picture>
 
-**Your agent is ready. You're not ready to trust it. We fix that.**
+**Ship agents that touch real infrastructure. Without handing over the keys.**
 
-**Run your agents 24/7. Credentials hidden. Every action logged. Big moves approved.**
+**Open-source agent runtime · Credential firewall · Audit every action · Kill switch**
 
 [![Try Free](https://img.shields.io/badge/UseZombie-Try_Free-brightgreen?style=for-the-badge)](https://usezombie.com)
 [![Docs](https://img.shields.io/badge/UseZombie-Docs-blue?style=for-the-badge)](https://docs.usezombie.com)
@@ -30,40 +30,20 @@ So you babysit it. Or you don't run it at all.
 
 ## What Zombies are
 
-A **Zombie** is a preconfigured agent workflow that does one job and runs forever.
+A **Zombie** is a long-running agent that operates against real infrastructure — your clusters, your servers, your codebases — without ever holding a real credential.
 
 ```
-"Install the Lead Zombie"       → handles inbound email, replies, logs leads
-"Install the Slack Bug Fixer"   → monitors #bugs, opens PRs, replies in thread
-"Install the PR Zombie"         → reviews every PR, posts feedback, alerts on critical
-"Install the Ops Zombie"        → watches infra, alerts on incidents
-"Install the Hiring Zombie"     → receives candidate profile (resume PDF, GitHub PRs,
-                                   Gmail), analyzes attachments for merit, sends you
-                                   a decision report on Discord
+"Homelab Zombie"              → diagnose your k3s cluster at 2am without cluster-admin
+"Migration Zombie"            → mechanical code migrations (Jest→Vitest, Node bumps) via playbooks
+"Side-project Resurrector"    → revive dormant repos, open a PR with fresh deps and CI
+"Homebox Audit"               → quarterly security + freshness audit of your self-hosted stack
 ```
 
-You don't code a Zombie. You configure it: what tools it attaches, what credentials it uses, what budget it has, what triggers it. The agent intelligence is built in.
-
-## How it works
-
-- **Sandboxed runtime** — bwrap + landlock isolation. Network deny-by-default.
-- **Credentials hidden** — vault injects at the sandbox boundary. The agent never sees API keys.
-- **Webhooks wired** — receive events from email, Slack, GitHub. No ngrok needed.
-- **Activity stream** — every action timestamped. `zombiectl logs` shows what happened and why.
-- **Spend ceiling** — per-day and per-month dollar budgets. One bad prompt never becomes an infinite burn.
-- **Kill switch** — `zombiectl kill` stops any agent mid-action. Checkpoint saved, no data lost.
-- **Crash recovery** — state checkpointed after every event. Crashes recover automatically.
+You don't code a Zombie. You write a skill spec in markdown — policy, allowed verbs, required credentials — and the runtime handles sandboxing, credential injection, audit logging, and approval gates. Need a skill we don't ship yet? [Open an issue](https://github.com/usezombie/usezombie/issues).
 
 ## Get started
 
-```bash
-npm install -g zombiectl
-zombiectl login
-zombiectl install lead-collector
-zombiectl up
-```
-
-[Read the docs →](https://docs.usezombie.com)
+Follow the [quickstart guide →](https://docs.usezombie.com)
 
 ## Repositories
 
