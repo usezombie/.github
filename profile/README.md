@@ -6,9 +6,9 @@
   <img src="https://raw.githubusercontent.com/usezombie/usezombie/main/assets/logo-dark.svg" width="200" alt="usezombie" />
 </picture>
 
-**Ship agents that touch real infrastructure.**
+**A markdown-defined, durable, BYOK zombie that owns one operational outcome — wakes on a GitHub Actions deploy failure, gathers evidence, posts a diagnosis to your Slack.**
 
-**Open-source agent runtime · Credential firewall · Audit every action · Kill switch**
+**Open source. Bring your own LLM key. The zombie keeps state across attempts, requests approval for risky actions, and stays on the outcome until it's resolved or explicitly blocked.**
 
 [![Try Free](https://img.shields.io/badge/UseZombie-Try_Free-brightgreen?style=for-the-badge)](https://usezombie.com)
 [![Docs](https://img.shields.io/badge/UseZombie-Docs-blue?style=for-the-badge)](https://docs.usezombie.com)
