@@ -19,24 +19,26 @@
 
 ## The problem
 
-You have a working agent. It can reply to emails, fix bugs, process payments, review PRs. But you won't let it run unsupervised because it holds your API keys, leaves no record of what it did, has no spend ceiling, and no kill switch. So you babysit it. Or you don't run it at all.
+A deploy fails at 2am. Your CD pipeline goes red. Now you're bouncing between five tools while holding the timeline in your head: GitHub Actions for the run logs, Grafana for the metrics, your observability dashboard for the traces, Slack for the alerts, your terminal for `kubectl` and `flyctl`. You correlate, you guess, you restart something with no clear root cause, and the next morning you can't reconstruct what you did.
 
-## What Zombies are
+The work is fragmented. State is lost between attempts. There is no durable memory across incidents.
 
-A **Zombie** is a long-running agent that operates against real infrastructure — your clusters, servers, codebases — without ever holding a real credential. Invoke it yourself, let another agent call it, or wire it into CI. Same guarantees.
+## What v2 ships
 
-| Zombie | What it does |
+A **Zombie** is a long-lived runtime that owns one operational outcome end-to-end. The v2 wedge ships one zombie: **`platform-ops`**.
+
+| Trigger | What happens |
 |---|---|
-| **Homelab Zombie** | Diagnose your k3s cluster at 2am without cluster-admin. |
-| **Homebox Audit** | Quarterly security + freshness audit of your self-hosted stack. |
-| **Side-project Resurrector** | Revive dormant repos, open a PR with fresh deps and CI. |
-| **Migration Zombie** | Mechanical code migrations (Jest→Vitest, Node bumps) via playbooks. |
+| GitHub Actions `workflow_run.conclusion=failure` webhook | Zombie wakes, fetches the failed run logs via the GH API, correlates against your hosting provider's logs and your data-plane health, posts an evidenced diagnosis to your Slack channel. |
+| `zombiectl steer {id} "morning health check"` | Same zombie, operator-initiated. Same reasoning loop, different `actor=` on the event. |
 
-You don't code a Zombie. 
+You don't code a Zombie. You write a `SKILL.md` in plain English (how to think, what evidence to gather, when to ask for approval) and a `TRIGGER.md` declaring tools, credentials, network allowlist, budget caps. The runtime handles sandboxing (Landlock + cgroups + bwrap), credential injection at the tool bridge, durable event history, and budget enforcement.
 
-> You write a skill spec in markdown — policy, allowed verbs, required credentials — and the runtime handles sandboxing, credential injection, audit logging, and approval gates.
+Install with `/usezombie-install-platform-ops` in any agent host (Claude Code, Amp, Codex CLI, OpenCode). Same slash-command everywhere.
 
-Need a Zombie we don't ship yet? [Open an issue](https://github.com/usezombie/usezombie/issues).
+## Differentiation (v2)
+
+Three structural pillars: **OSS** (read the code that holds your credentials), **BYOK** (your LLM provider key, your inference cost), **markdown-defined** (configuration in prose, not typed control flow). Self-host arrives in v3.
 
 ## Get started
 
